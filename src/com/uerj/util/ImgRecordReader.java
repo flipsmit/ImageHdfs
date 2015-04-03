@@ -18,6 +18,12 @@ import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
+/**
+ * ImgRecordReader - Class to Buffer and split a Image.
+ * @author Felipe Batista
+ */
+
+
 public class ImgRecordReader extends RecordReader<LongWritable, BufferedImage> {
 	// Image information
 	
@@ -182,7 +188,6 @@ public class ImgRecordReader extends RecordReader<LongWritable, BufferedImage> {
 			totalXSplits = (int)Math.ceil(reader.getWidth(0) / Math.min(sizePixel, reader.getWidth(0)));
 			totalYSplits = (int)Math.ceil(reader.getHeight(0) / Math.min(sizePixel, reader.getHeight(0)));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

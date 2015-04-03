@@ -8,19 +8,19 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * provides methods for reading an image file
- * @author muetze
+ * methods to read an image file
+ * @author Felipe Batista
  *
  */
 public class FileImageReader {
 
         /**
-         * opens the file fname and stores the imagedata in Image
+         * Open and stores image data in Image
          * @param fname String
-         * @return MMTImage
+         * @return WImage
          * @throws IOException 
          */
-        public static MMTImage read(String fname) throws IOException {
+        public static WImage read(String fname) throws IOException {
                 File f = new File(fname);
                 BufferedImage bi = ImageIO.read(f);
                 Raster raster = bi.getData();
@@ -28,7 +28,7 @@ public class FileImageReader {
                 int width = raster.getWidth();
                 int height = raster.getHeight();
                 
-                MMTImage img = new MMTImage(width, height);
+                WImage img = new WImage(width, height);
                 img.setName(iname);
                 img.setData(raster.getPixels(0, 0, width, height, img.getData()));
                 f=null;
@@ -38,12 +38,12 @@ public class FileImageReader {
                 return img;
         }
         /**
-         * opens the file fname and stores the imagedata in Image
+         * Open and stores image data in Image
          * @param fname String
-         * @return MMTImage
+         * @return WImage
          * @throws IOException 
          */
-        public static MMTImage read(String iname,BufferedImage bi) throws IOException {
+        public static WImage read(String iname,BufferedImage bi) throws IOException {
         		BufferedImage oi = new BufferedImage(bi.getWidth(), bi.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
         		for (int x=0; x < bi.getWidth(); x++) {
                     for (int y=0; y < bi.getHeight(); y++) {
@@ -55,7 +55,7 @@ public class FileImageReader {
                 int width = raster.getWidth();
                 int height = raster.getHeight();
                 
-                MMTImage img = new MMTImage(width, height);
+                WImage img = new WImage(width, height);
                 img.setName(iname);
                 int[] data=raster.getPixels(0, 0, width, height, img.getData());
                 img.setData(data);

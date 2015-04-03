@@ -1,34 +1,33 @@
 package com.uerj.util;
 
-//TODO import ...
-
 /**
- * 
- * This class is used for holding gray scale image data
+ * WImage - class used to work with grayscale image.
+ * @author Felipe Batista
+ *
  */
-public class MMTImage {
+public class WImage {
 
-        /** the image data */
+        /** image data 
+         */
         private int[] data;
 
-        /** the width of the image */
+        /** image width*/
         private int w;
 
-        /** the height of the image */
+        /** image height*/
         private int h;
 
-        /** the name of the image */
+        /** image name*/
         private String name;
 
         /**
          * creates an image and allocates memory
-         * 
          * @param width
-         *            width of the image
+         *             image width 
          * @param height 
-         *                        height of the image 
+         *             image height 
          */
-        public MMTImage(int width, int height) {
+        public WImage(int width, int height) {
                 this.data = new int[width*height];
                 this.h = height;
                 this.w = width;
@@ -55,17 +54,17 @@ public class MMTImage {
                 return this.data[i];
         }
 
-        /** the height of the image */
+        /** image height*/
         public int getHeight() {
                 return this.h;
         }
 
-        /** the width of the image */
+        /** image width*/
         public int getWidth() {
                 return this.w;
         }
 
-        /** the name of the image */
+        /** image name*/
         public String getName() {
                 return this.name;
         }
@@ -122,19 +121,18 @@ public class MMTImage {
          * @param ystart int startpoint y
          * @param width int width of subpicture
          * @param height int height of subpicture
-         * @return MMTImage the subpicture
+         * @return WImage the subpicture
          */
-        public MMTImage getSubPicture(int xstart, int ystart, int width, int height) {
+        public WImage getSubPicture(int xstart, int ystart, int width, int height) {
 
-                // check Parameter
                 if ((xstart < 0) || (ystart < 0) || (width < 0) || (height < 0)) {
-                        throw new IllegalArgumentException("negativ values are not allowed!");
+                        throw new IllegalArgumentException("Negative values are not allowed!");
                 }
                 if (((xstart + width) > this.w) || (ystart + height) > this.h) {
                         throw new IllegalArgumentException("Area of subpicture is outside the original image.");
                 }
 
-                MMTImage im = new MMTImage(width, height);
+                WImage im = new WImage(width, height);
                 
                 for (int x=0; x<width; x++) {
                         for (int y=0; y<height; y++) {

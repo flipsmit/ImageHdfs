@@ -1,16 +1,15 @@
 package com.uerj.util;
 
 /**
- * applies an laplacian filter.
- * therefore the sum of the coefficients has to be 0!
- * after applying the filter, the absolut values are used for the resulting image.
+ * LaplacianFilter - Class to apply an Laplacian Filter in a image.
+ * The sum of the coefficients has to be 0!
+ * after applying, the absolut values are used for the resulting image.
  * the values are also limited from 0 to 255.
- * @author muetze
- *
+ * @author Felipe Batista
  */
 public class LaplacianFilter extends LinearImageFilter {
 
-        public LaplacianFilter(BorderHandling borderHandling, MMTImage coefficients) {
+        public LaplacianFilter(BorderHandling borderHandling, WImage coefficients) {
                 super(borderHandling, coefficients);
 
                 // check coefficients
@@ -23,13 +22,13 @@ public class LaplacianFilter extends LinearImageFilter {
          * applies the laplacian filter.
          */
         @Override
-        public MMTImage applyFilter(MMTImage img) {
-                MMTImage nim = new MMTImage(img.getWidth(), img.getHeight());
+        public WImage applyFilter(WImage img) {
+                WImage nim = new WImage(img.getWidth(), img.getHeight());
                 
                 for (int x=0; x<img.getWidth(); x++) {
                         for (int y=0; y<img.getHeight(); y++) {
-                                MMTImage cf = this.getSubCoeffs(x, y, img);     //coefficients
-                                MMTImage sim = this.getPart(x, y, img);         //subimage
+                                WImage cf = this.getSubCoeffs(x, y, img);     //coefficients
+                                WImage sim = this.getPart(x, y, img);         //subimage
                                 
                                 // calculate new pixel
                                 int nval=0;

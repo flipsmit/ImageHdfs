@@ -3,13 +3,12 @@ package com.uerj.util;
 
 
 /**
- * ImageFilter is an abstract Class to implement an linear or nonlinear filter.
- * The class provides a method to get a subpicture regarding to the filtersize
- * around the position of the picture to be calculated.
- * Borderhandling can be defined.
- * @author Mürzl Harald
- *
+ * ImageFilter - Abstract Class to implement an linear filter.
+ * The class have a method to get a subpicture regarding to the filtersize
+ * @author Felipe Batista
  */
+
+
 public abstract class ImageFilter {
 
         protected int width;
@@ -26,12 +25,12 @@ public abstract class ImageFilter {
         }
 
         /**
-         * applyFilter applies the filter on the MMTImage img.
-         * It returns a new MMTImage.
-         * @param img MMTImage
-         * @return MMTImage
+         * applyFilter applies the filter on the WImage img.
+         * It returns a new WImage.
+         * @param img WImage
+         * @return WImage
          */
-        public abstract MMTImage applyFilter(MMTImage img);
+        public abstract WImage applyFilter(WImage img);
 
         /**
          * getPart returns the subpicture of img regarding to the filter width.
@@ -40,10 +39,10 @@ public abstract class ImageFilter {
          * 
          * @param x int, the x coordinate of the pixel to be calculated.
          * @param y int, the y coordinate of the pixel to be calculated.
-         * @param img MMTImage, the Image from where to get the subpicture.
-         * @return MMTImage the subpicture.
+         * @param img WImage, the Image from where to get the subpicture.
+         * @return WImage the subpicture.
          */
-        protected MMTImage getPart(int x, int y, MMTImage img) {
+        protected WImage getPart(int x, int y, WImage img) {
                 
                 int imw = img.getWidth();       //width of image
                 int imh = img.getHeight();      //height of image
@@ -62,7 +61,7 @@ public abstract class ImageFilter {
                 else {
                         // borderhandling PADDING (if pixel outside --> pixel = 0)
                         if (border == BorderHandling.PADDING) {
-                                MMTImage nim = new MMTImage(this.width, this.width);
+                                WImage nim = new WImage(this.width, this.width);
                                 for (int xhelp=xs; xhelp<=xe; xhelp++) {
                                         for (int yhelp=ys; yhelp<=ye; yhelp++) {
                                                 int val = 0;
@@ -84,7 +83,7 @@ public abstract class ImageFilter {
                                 int nwidth = this.width-left-right;
                                 int nheight = this.width-up-down;
                                 
-                                MMTImage nim = new MMTImage(nwidth, nheight);
+                                WImage nim = new WImage(nwidth, nheight);
                                 for (int xhelp=0; xhelp<nwidth; xhelp++) {
                                         for (int yhelp=0; yhelp<nheight; yhelp++) {
                                                 int val = img.getPixel(xhelp+left+xs, yhelp+up+ys);

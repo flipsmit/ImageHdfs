@@ -25,7 +25,7 @@ import com.uerj.util.ImgRecordReader;
 import com.uerj.util.InputFormatImg;
 import com.uerj.util.SobelMapper;
 
-public class FiltroSobel extends Configured implements Tool {
+public class SobelFilter extends Configured implements Tool {
 	public int run(String[] args) throws Exception {
 		long chrono = System.currentTimeMillis();
 		Configuration conf = new Configuration();
@@ -56,15 +56,16 @@ public class FiltroSobel extends Configured implements Tool {
 		if (dfs.exists(outdir))
 			dfs.delete(outdir, true);
 
-		// Juntar a imagem
+
 
 		Path workdir = dfs.getWorkingDirectory();
 		BufferedImage img = null;
 
-		// Juntar a imagem
 
+		// Instantiate a Hadoop Job
+		
 		Job job = new Job(conf, "Sobel Edge detection");
-		job.setJarByClass(FiltroSobel.class);
+		job.setJarByClass(SobelFilter.class);
 		job.setMapperClass(SobelMapper.class);
 		job.setInputFormatClass(InputFormatImg.class);
 
@@ -76,12 +77,11 @@ public class FiltroSobel extends Configured implements Tool {
 
 		boolean ret = job.waitForCompletion(true);
 
-		// Juntar a imagem
-
 		String s = job.getTrackingURL();
 		Path tmpdir = new Path(workdir, s.substring(s.indexOf("jobid") + 6));
-
-		//mergeImages(img, tmpdir, dfs, fpath, outdir);
+		
+		//Merge all splitted images
+		mergeImages(img, tmpdir, dfs, fpath, outdir);
 
 		System.out.println("Tempo (s): "
 				+ ((System.currentTimeMillis() - chrono) / 60));
@@ -167,7 +167,6 @@ public class FiltroSobel extends Configured implements Tool {
 			newimgpath = null;
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 
@@ -244,12 +243,11 @@ public class FiltroSobel extends Configured implements Tool {
 //			newimgpath = null;
 //
 //		} catch (Exception e) {
-//			// TODO: handle exception
 //		}
 //	}
 
 	public static void main(String[] args) throws Exception {
-		FiltroSobel driver = new FiltroSobel();
+		SobelFilter driver = new SobelFilter();
 		int exitCode = ToolRunner.run(driver, args);
 		System.exit(exitCode);
 	}

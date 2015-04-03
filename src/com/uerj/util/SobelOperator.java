@@ -1,6 +1,9 @@
 package com.uerj.util;
 
-
+/**
+ * SobelOperator - Class to apply a Sobel filter.
+ * @author Felipe Batista
+ */
 public class SobelOperator extends ImageFilter {
 
         public SobelOperator(BorderHandling borderHandling) {
@@ -10,10 +13,10 @@ public class SobelOperator extends ImageFilter {
 
 
         @Override
-        public MMTImage applyFilter(MMTImage img) {
-                MMTImage nim = new MMTImage(img.getWidth(), img.getHeight());
-                MMTImage xcoefs = new MMTImage(3, 3);
-                MMTImage ycoefs = new MMTImage(3, 3);
+        public WImage applyFilter(WImage img) {
+                WImage nim = new WImage(img.getWidth(), img.getHeight());
+                WImage xcoefs = new WImage(3, 3);
+                WImage ycoefs = new WImage(3, 3);
                 
                 BorderHandling bordh = (this.border == BorderHandling.LIMITING) ? BorderHandling.PARTIAL : this.border;
                 
@@ -21,8 +24,8 @@ public class SobelOperator extends ImageFilter {
                 ycoefs.setData(new int[] {-1, -2, -1, 0, 0, 0, 1, 2, 1});
                 LaplacianFilter lfx = new LaplacianFilter(bordh, xcoefs);
                 LaplacianFilter lfy = new LaplacianFilter(bordh, ycoefs);
-                MMTImage xim = lfx.applyFilter(img);
-                MMTImage yim = lfy.applyFilter(img);
+                WImage xim = lfx.applyFilter(img);
+                WImage yim = lfy.applyFilter(img);
                 
                 for (int x=0; x<img.getWidth(); x++) {
                         for (int y=0; y<img.getHeight(); y++) {

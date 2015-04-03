@@ -14,24 +14,23 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
 /**
- * provides methods for writing an image file
- * 
- * @author muetze
- * 
+ * methods for writing an image file
+ * @author Felipe Batista
+ *
  */
 public class FileImageWriter {
 
 	/**
-	 * writes the MMTImage to the file specified by fname the type of the
+	 * writes the WImage to the file specified by fname the type of the
 	 * imagefile is automatically set by the file extension (*.jpg, *.png,...).
 	 * see doc of javax.imageio.ImageIO for further information.
 	 * 
 	 * @param img
-	 *            MMTImage image to save
+	 *            WImage image to save
 	 * @param fname
 	 *            String name of the file
 	 */
-	public static void write(MMTImage img, String fname) {
+	public static void write(WImage img, String fname) {
 		BufferedImage bi = new BufferedImage(img.getWidth(), img.getHeight(),
 				BufferedImage.TYPE_BYTE_GRAY);
 
@@ -49,16 +48,16 @@ public class FileImageWriter {
 	}
 
 	/**
-	 * writes the MMTImage to the file specified by fname the type of the
+	 * writes the WImage to the file specified by fname the type of the
 	 * imagefile is automatically set by the file extension (*.jpg, *.png,...).
 	 * see doc of javax.imageio.ImageIO for further information.
 	 * 
 	 * @param img
-	 *            MMTImage image to save
+	 *            WImage image to save
 	 * @param fname
 	 *            String name of the file
 	 */
-	public static void write(MMTImage img, String fname, Context context,
+	public static void write(WImage img, String fname, Context context,
 			LongWritable key) {
 		BufferedImage bi = new BufferedImage(img.getWidth(), img.getHeight(),
 				BufferedImage.TYPE_BYTE_GRAY);
